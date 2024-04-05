@@ -25,6 +25,7 @@ function PostForm() {
     }
   })
 
+  //2. onsubmit function
   function onSubmit(values: z.infer<typeof formSchema>) {
     toast({
       title: "You Submitted the following values:",
@@ -38,26 +39,29 @@ function PostForm() {
   }
 
   return (
-    <div className="mt-4 grid w-full max-w-sm items-center m-10 gap-1.5">
+    <div className="flex flex-col justify-between">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({field}) => {
-              return(
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="shadcn" {...field} />
-                  </FormControl>
-                  <FormDescription>This is your public display name</FormDescription>
-                  <FormMessage/>
-              </FormItem>
-              )
-            }}
-          />
-
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mx-auto mt-4 grid max-w-screen-lg grid-cols-2 gap-x-12 gap-y-8">
+          <div className="col-span-2">
+            <FormField
+              control={form.control}
+              name="username"
+              render={({field}) => {
+                return(
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormDescription>This is your public display name</FormDescription>
+                    <FormMessage/>
+                </FormItem>
+                )
+              }}
+            />
+          </div>
+          
+          <div>
           <FormField
             control={form.control}
             name="password"
@@ -74,10 +78,35 @@ function PostForm() {
               )
             }}
           />
-          <Button type="submit">Submit</Button>
+          </div>
+          
+          <div>
+          <FormField
+            control={form.control}
+            name="password"
+            render={({field}) => {
+              return(
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input type="password" placeholder="min 5 characters" {...field}/>
+                  </FormControl>
+                  <FormDescription>Please keep your password safe</FormDescription>
+                  <FormMessage/>
+              </FormItem>
+              )
+            }}
+          />
+          </div>
+          
+          <div className="col-span-2">
+            <Button type="submit">Submit</Button>
+          </div>
+          
         </form>
       </Form>
     </div>
+    
   )
 }
 
