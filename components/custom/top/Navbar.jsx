@@ -5,6 +5,9 @@ import { useState } from "react"
 import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/solid"
 import MenuOverlay from "./MenuOverlay"
 import style from './Navbar.module.css'
+import { Oswald } from "next/font/google"
+
+const oswald = Oswald({subsets: ['latin']})
 
 const navLinks = [
   {
@@ -28,8 +31,8 @@ function Navbar() {
       <header className={style.header}>
         <nav className="fixed top-0 left-0 right-0 z-10 bg-[#DAE7F1] dark:bg-black bg-opacity-90">
           <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-2">
-            <Link href='/' className="text-2xl md:text-4xl font-semibold">
-              LOGO
+            <Link href='/' className={`${oswald.className} text-2xl md:text-4xl font-semibold`}>
+              bRel's Stash
             </Link>
             <div className="mobile-menu block md:hidden">
               {
