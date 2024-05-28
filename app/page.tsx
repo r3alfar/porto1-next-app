@@ -1,6 +1,7 @@
 import About from "@/components/custom/content/About";
 import ProjectSection from "@/components/custom/content/ProjectSection";
 import HeroSection from "@/components/custom/top/HeroSection";
+import MainMidContent from "@/components/custom/combined-layout/MidContent/MainMidContent";
 
 export default function Home() {
   return (
@@ -8,7 +9,10 @@ export default function Home() {
       <div className="container mt-24 mx-auto px-12 py-4">
         <HeroSection/>
         <About/>
-        <ProjectSection/>
+        {/* <ProjectSection/> */}
+      </div>
+      <div>
+        <MainMidContent/>
       </div>
     </main>
   )

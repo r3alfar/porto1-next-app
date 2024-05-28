@@ -8,7 +8,7 @@ function MainMidContent() {
     <div className="flex h-150">
       <C1/>
       <C2/>
-      <C3/>
+      {/* <C3/> */}
       
     </div>
   )

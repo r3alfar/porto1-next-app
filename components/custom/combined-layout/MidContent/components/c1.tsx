@@ -20,6 +20,8 @@ function C1() {
             </ScrollArea>
         </div>
 
+        <Separator className="my-4 bg-black"/>
+
         <div className="max-h-80 p-2 outline outline-1">
             <h2 className="">Popular Tags</h2>
             <Separator />
