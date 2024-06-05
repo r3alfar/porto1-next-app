@@ -4,6 +4,7 @@ import React from 'react'
 import Image from 'next/image';
 import { Textarea } from '@/components/ui/textarea';
 import { Separator } from '@/components/ui/separator';
+import { Rating } from 'react-simple-star-rating';
 
 const teks = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut convallis orci quis quam venenatis tristique. Mauris lacinia tortor sed quam dictum faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin volutpat vulputate varius. Aenean sed tortor nibh. Suspendisse congue, metus in interdum tempus, mi magna tempor diam, in congue ipsum turpis eu metus. Aliquam at efficitur ante. Vestibulum faucibus neque tellus, ac viverra leo bibendum semper. Nullam ac quam ac enim venenatis faucibus vitae id velit. Nam vel dictum sem.'
 const blogsDummy = [
@@ -14,7 +15,8 @@ const blogsDummy = [
     category: 'learn',
     tags: ['code', 'nextjs'],
     description: teks,
-    images: '/ss_blog.png'
+    images: '/ss_blog.png',
+    rating: 3,
   },
   {
     id: 2,
@@ -23,7 +25,8 @@ const blogsDummy = [
     category: 'share',
     tags: ['code', 'ideas'],
     description: teks,
-    images: '/ss_blog.png'
+    images: '/ss_blog.png',
+    rating: 4.5
   },
   {
     id: 3,
@@ -32,7 +35,8 @@ const blogsDummy = [
     category: 'music',
     tags: 'song',
     description: teks,
-    images: '/ss_blog.png'
+    images: '/ss_blog.png',
+    rating: 3.5,
   }
 ]
 
@@ -44,9 +48,13 @@ function BlogsComponent() {
     return formattedDate
   }
 
+  const capitalizer = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
   return (
     <div className='mt-2'>
-      <h1>Recent Blog Posts</h1>
+      <h1 className='my-2 justify-center'>Recent Blog Posts</h1>
       <Separator className='my- 2' />
       <div
         className='grid grid-cols-1 justify-items-start'
@@ -58,7 +66,7 @@ function BlogsComponent() {
             >
               <CardContent className='pb-0 pl-0'>
                 <div className='relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white'>
-                  <div className='w-full md:w-1/3 bg-white grid place-items-center'>
+                  <div className='w-full md:w-1/3 bg-white flex justify-center items-baseline'>
                     <Image
                       src={blog.images}
                       alt={blog.title}
@@ -67,17 +75,17 @@ function BlogsComponent() {
                   </div>
                   <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
                     <div className="flex justify-between item-center">
-                      <p className="text-gray-500 font-medium hidden md:block">{convertToDateTime(blog.release_date)}</p>
-                      <div className="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-500" viewBox="0 0 20 20"
-                          fill="currentColor">
-                          <path
-                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                        <p className="text-gray-600 font-bold text-sm ml-1">
-                          4.96
-                          <span className="text-gray-500 font-normal">(76 reviews)</span>
-                        </p>
+                      <p className="text-gray-500 font-medium hidden md:block">{capitalizer(blog.category)}</p>
+                      <div className="flex items-center overflow-hidden">
+                        <Rating
+                          key={blog.id}
+                          size={15}
+                          initialValue={blog.rating}
+                          allowFraction
+                          readonly
+                          SVGclassName={`inline-block`}
+                          className='mb-2 overflow-hidden'
+                        />
                       </div>
                       <div className="">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-pink-500" viewBox="0 0 20 20" fill="currentColor">
@@ -89,9 +97,8 @@ function BlogsComponent() {
                       <div className="bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 hidden md:block">
                         Superhost</div>
                     </div>
-                    <h3 className="font-black text-gray-800 md:text-3xl text-xl">The Majestic and Wonderful Bahamas</h3>
-                    <p className="md:text-lg text-gray-500 text-base">The best kept secret of The Bahamas is the country’s sheer
-                      size and diversity. With 16 major islands, The Bahamas is an unmatched destination</p>
+                    <h3 className="font-black text-gray-800 md:text-3xl text-xl">{blog.title}</h3>
+                    <p className="md:text-lg text-gray-500 text-base">{blog.description}</p>
                     <p className="text-xl font-black text-gray-800">
                       $110
                       <span className="font-normal text-gray-600 text-base">/night</span>

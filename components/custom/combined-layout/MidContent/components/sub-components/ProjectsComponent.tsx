@@ -113,9 +113,9 @@ function ProjectsComponent() {
 
 	return (
 		<div className='mt-2'>
-			<div>
-				<Tabs defaultValue="All" className='items-center object-center' onValueChange={handleTagChange}>
-					<TabsList className="w-full">
+			<div className='mt-2 flex justify-center'>
+				<Tabs defaultValue="All" className='' onValueChange={handleTagChange}>
+					<TabsList className="grid w-[300px] grid-cols-4">
 						<TabsTrigger value="All">All</TabsTrigger>
 						<TabsTrigger value="Web">Web</TabsTrigger>
 						<TabsTrigger value="Mobile">Mobile</TabsTrigger>
